@@ -154,9 +154,7 @@ export PATH=$PATH:$JAVA_HOME/bin
      （**如果使用的是编译安装法，则启动方式不同**）
       ># nginx
 
-
-------------------------------
-会遇到的问题：
+**会遇到的问题**：
 centos6.5环境
 修改nginx配置文件后，重启报错。（使用第5步时也会报这个错）：
 nginx: [emerg] socket() [::]:80 failed (97: Address family not supported by protocol)
@@ -168,8 +166,8 @@ vim /etc/nginx/conf.d/default.conf
 
 改成
 	     listen       80;
-	     \#listen       [::]:80 default_server;
-------------------------------
+	     #listen       [::]:80 default_server;
+
 ###3.6.#重启nginx
    ># nginx -s reload
 
@@ -293,7 +291,7 @@ http://tomcat.apache.org/download-70.cgi
 
 			  tcp_nodelay on;
 
-			\#  fastcgi_connect_timeout 300;
+			#  fastcgi_connect_timeout 300;
 			#  fastcgi_send_timeout 300;
 			#  fastcgi_read_timeout 300;
 			#  fastcgi_buffer_size 64k;

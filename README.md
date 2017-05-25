@@ -126,8 +126,10 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 ##第三步：centos 中安装nginx（反向代理服务器）
 ###3.1.# 我这里得到的最新版 nginx 是 v1.6.3-8.el7
+
 	># yum list nginx
 ###3.2.# 安装 nginx
+
 	># yum install nginx
 ###### 如果需要升级 nginx 运行 yum update nginx 即可
 
@@ -140,9 +142,12 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 
 ###3.3.# 查询 nginx 包名称
+
 	># rpm -qa nginx
 	nginx-1.6.3-9.el7.x86_64  
+
 ###3.4.# 查询 nginx-1.6.3-9.el7.x86_64 包文件路径
+
 	># rpm -ql nginx-1.6.3-9.el7.x86_64
 	...
 	/etc/nginx/mime.types.default
@@ -151,6 +156,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 	...
 
 ###3.5.#使用yun安装nginx后直接输入以下命令即可运行nginx
+
      （**如果使用的是编译安装法，则启动方式不同**）
       ># nginx
 
@@ -158,6 +164,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 centos6.5环境
 修改nginx配置文件后，重启报错。（使用第5步时也会报这个错）：
 nginx: [emerg] socket() [::]:80 failed (97: Address family not supported by protocol)
+
 解决办法：
 vim /etc/nginx/conf.d/default.conf
 将

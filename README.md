@@ -357,12 +357,26 @@ http://tomcat.apache.org/download-70.cgi
 			      }   
 			}
 
+## 第六步（如果使用ghost构建自己的博客） 使用Forever让Ghost后台运行
+### 6.1安装forever包
 
+	npm install forever -g
 
+### 6.2启动Ghost用这条命令
 
-## 第六步：linux Centos 6.5 安装桌面环境GNOME  (**感兴趣可以尝试**)
+	NODE_ENV=production forever start index.js
 
-## 第七步：安装samba： (**感兴趣可以尝试**)
+### 6.3关闭ghost用这条命令
+
+	forever stop index.js
+
+### 6.3查看运行状态用这条命令
+
+	forever list
+
+## 第七步：linux Centos 6.5 安装桌面环境GNOME  (**感兴趣可以尝试**)
+
+## 第八步：安装samba： (**感兴趣可以尝试**)
 	yum -y install samba
 	yum -y install sambaclient
 	启动sumba服务 service samba start

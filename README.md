@@ -3,7 +3,7 @@ use ( tomcat + nginx + openJdk + mysql  ) to  configure linux server
 
 
 
-##第一步：安装openjdk
+## 第一步：安装openjdk
 
 
 -------------------
@@ -13,11 +13,11 @@ use ( tomcat + nginx + openJdk + mysql  ) to  configure linux server
 注意：openJDK安装好后的目录位于：/usr/lib/jvm 下，包括jre和jdk。
       可以通过 rpm -ql java-1.8.0-openjdk  查看相关包的管理情况
 ------------------
-###1.1.#安装openjdk
+### 1.1.安装openjdk
 yum install java-1.8.0-openjdk
 
 
-###1.2.#配置环境变量
+### 1.2.配置环境变量
 vi /etc/profile
 添加一下内容
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-0.b15.el6_8.x86_64
@@ -27,11 +27,11 @@ export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/li
 export PATH=$PATH:$JAVA_HOME/bin
 
  
-###1.3.#使文件生效
+### 1.3.使文件生效
 这样我们就设置好了JDK，再输入source /etc/profile 就可以生效了.  
 
 
-##第二步：在linux的服务器中怎样使用mysql
+## 第二步：在linux的服务器中怎样使用mysql
 
 前提 ：1、CentOs7版本默认情况下安装了mariadb-libs，必须先卸载才可以继续安装MySql。 
 			a) 查找以前是否安装mariadb-libs
@@ -44,7 +44,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 			 ># rpm -qa | grep -i mysql
 			 有的话，也删除
 			 
-###2.1、安装（**暂时不明白mysql客户端与mysql 服务器端两者的关系**）
+### 2.1、安装（**暂时不明白mysql客户端与mysql 服务器端两者的关系**）
 	查看有没有安装过：
 		  ># yum list installed mysql*
 		  ># rpm -qa | grep mysql*
@@ -59,7 +59,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 		  ># yum install mysql-server
 		  ># yum install mysql-devel
 
-###2.2、启动&&停止
+### 2.2、启动&&停止
  
 	数据库字符集设置
 		  mysql配置文件/etc/my.cnf中加入default-character-set=utf8
@@ -78,14 +78,14 @@ export PATH=$PATH:$JAVA_HOME/bin
 	chown -R mysql:mysql /var/lib/mysql
 	/etc/rc.d/init.d/mysqld start
 
-###2.3、登录数据库
+### 2.3、登录数据库
  
-	####2.3.1创建root管理员：
+	#### 2.3.1创建root管理员：
 		  ># mysqladmin -u root password 123456
 
-	####2.3.2登录：
+	#### 2.3.2登录：
 		  ># mysql -u root -p 输入密码即可。
-	####2.3.3忘记密码：
+	#### 2.3.3忘记密码：
 		  ># service mysqld stop
 		  ># mysqld_safe --user=root --skip-grant-tables
 		  ># mysql -u root
@@ -93,42 +93,42 @@ export PATH=$PATH:$JAVA_HOME/bin
 		  ># update user set password=password("new_pass") where user="root";
 		  ># flush privileges;  
  
-###2.4、远程访问数据库 （**不常用**）
+### 2.4、远程访问数据库 （**不常用**）
  
 	开放防火墙的端口号
 	mysql增加权限：mysql库中的user表新增一条记录host为“%”，user为“root”。
 
 
-###2.5、Linux MySQL的几个重要目录
-	####2.5.1数据库目录
+### 2.5、Linux MySQL的几个重要目录
+	#### 2.5.1数据库目录
 		 /var/lib/mysql/
-	####2.5.2配置文件
+	#### 2.5.2配置文件
 		 /usr/share /mysql（mysql.server命令及配置文件）
-	####2.5.3相关命令
+	#### 2.5.3相关命令
 		 /usr/bin（mysqladmin mysqldump等命令）
-	####2.5.4启动脚本
+	#### 2.5.4启动脚本
 		 /etc/rc.d/init.d/（启动脚本文件mysql的目录）
 		 
 
-###2.6.进入数据库后
-	####2.6.1.mysql> show databases 查看所有的数据库
-	####2.6.2.mysql> use database_name 进入想要操作的数据库中
-	####2.6.3.mysql> show tables 查看所有的数据表
+### 2.6.进入数据库后
+	#### 2.6.1.mysql> show databases 查看所有的数据库
+	#### 2.6.2.mysql> use database_name 进入想要操作的数据库中
+	#### 2.6.3.mysql> show tables 查看所有的数据表
 
 
 
-###2.7.进入mysql的命令行界面后，使用语句
+### 2.7.进入mysql的命令行界面后，使用语句
 	source testDB.sql 来导入数据库
 
 
 
 =========================================================================================================================
 
-##第三步：centos 中安装nginx（反向代理服务器）
-###3.1.# 我这里得到的最新版 nginx 是 v1.6.3-8.el7
+## 第三步：centos 中安装nginx（反向代理服务器）
+### 3.1.我这里得到的最新版 nginx 是 v1.6.3-8.el7
 
 	># yum list nginx
-###3.2.# 安装 nginx
+### 3.2.安装 nginx
 
 	># yum install nginx
 ###### 如果需要升级 nginx 运行 yum update nginx 即可
@@ -141,12 +141,12 @@ export PATH=$PATH:$JAVA_HOME/bin
 ------------------------------------------
 
 
-###3.3.# 查询 nginx 包名称
+### 3.3.查询 nginx 包名称
 
 	># rpm -qa nginx
 	nginx-1.6.3-9.el7.x86_64  
 
-###3.4.# 查询 nginx-1.6.3-9.el7.x86_64 包文件路径
+### 3.4.查询 nginx-1.6.3-9.el7.x86_64 包文件路径
 
 	># rpm -ql nginx-1.6.3-9.el7.x86_64
 	...
@@ -155,7 +155,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 	/etc/nginx/nginx.conf.default
 	...
 
-###3.5.#使用yun安装nginx后直接输入以下命令即可运行nginx
+### 3.5.使用yun安装nginx后直接输入以下命令即可运行nginx
 
      （**如果使用的是编译安装法，则启动方式不同**）
       ># nginx
@@ -175,10 +175,10 @@ vim /etc/nginx/conf.d/default.conf
 	     listen       80;
 	     #listen       [::]:80 default_server;
 
-###3.6.#重启nginx
+### 3.6.重启nginx
    ># nginx -s reload
 
-###3.7.#关闭nginx
+### 3.7.关闭nginx
 
     #### 1）强制停止Nginx：
 		pkill -9 nginx
@@ -190,7 +190,7 @@ vim /etc/nginx/conf.d/default.conf
 		kill -TERM 主进程号
 		
 		
-###3.8.# 修改过nginx.conf配置文件后，可以使用以下命令查看文件是否有问题
+### 3.8.修改过nginx.conf配置文件后，可以使用以下命令查看文件是否有问题
 
  	># nginx -t
 
@@ -200,11 +200,11 @@ vim /etc/nginx/conf.d/default.conf
 =====================================================================================================================
 
 
-##第四步：配置tomcat
+## 第四步：配置tomcat
 
-###（一）.使用源文件进行部署tomcat
+### （一）.使用源文件进行部署tomcat
 
-####4.1.#下载和解压安装
+#### 4.1.下载和解压安装
 -------------------------------------------------
 可以在本地从官网上下载安装包，然后传到服务器
 http://tomcat.apache.org/download-70.cgi
@@ -219,12 +219,12 @@ http://tomcat.apache.org/download-70.cgi
 个人习惯把tomcat放在/user/local下，下载后解压，再更名为tomcat 
 ---------------------------------------------------------
 
-####4.2#.修改tomcat配置（如区项目名）
+#### 4.2.修改tomcat配置（如区项目名）
 <host>下添加一行代码
   <Context docBase="blog" path="" debug="0"  reloadable="true"/>
   
   
-####4.3#.修改配置文件conf/server.xml改为监听80端口，默认编码utf-8，并开启gzip压缩 (这一步不是必须的)
+#### 4.3.修改配置文件conf/server.xml改为监听80端口，默认编码utf-8，并开启gzip压缩 (这一步不是必须的)
     <Connector port="80" protocol="HTTP/1.1"
                connectionTimeout="20000"
                redirectPort="8443" executor="tomcatThreadPool" URIEncoding="utf-8"   
@@ -233,16 +233,16 @@ http://tomcat.apache.org/download-70.cgi
                compressableMimeType="text/html,text/xml,text/javascript,text/css,text/plain" />
            <!-- A "Connector" using the shared thread pool-->
 	
-####4.4#.启动tomcat(一定进入tomcat的bin目录才执行的)
+#### 4.4.启动tomcat(一定进入tomcat的bin目录才执行的)
 
 	># sh startup.sh   或者  ./startup.sh
 
-####4.5#.关闭tomcat(一定进入tomcat的bin目录才执行的)
+#### 4.5.关闭tomcat(一定进入tomcat的bin目录才执行的)
 
 	># sh shutdown.sh  或者  ./shutdown.sh
 
 
-####4.6#远程查看tomcat的控制台:
+#### 4.6远程查看tomcat的控制台:
 　　    进入tomcat/logs/文件夹下 键入指令：tail -f catalina.out 就可以查看控制台了
 　　    或者
    	是使用bin目录下的catalina.sh run命令，如果能进入控制台，说明tomcat启动成功 （第二种方法好像行不通）
@@ -253,10 +253,10 @@ http://tomcat.apache.org/download-70.cgi
 
 
 
-##第五步：利用nginx整合tomcat
+## 第五步：利用nginx整合tomcat
 
 
-###5.1编辑安装目录下的nginx.conf，输入如下内容 :
+### 5.1编辑安装目录下的nginx.conf，输入如下内容 :
 
 			运行nginx所在的用户名和用户组
 			#user  www www; 
